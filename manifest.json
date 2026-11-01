@@ -1,0 +1,18 @@
+{
+  "id": "/Laporan-Harian-KBR/",
+  "name": "Laporan Harian TBM",
+  "short_name": "Laporan TBM",
+  "description": "Aplikasi laporan harian Toolbox Meeting (TBM).",
+  "lang": "id",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#14191a",
+  "theme_color": "#14191a",
+  "categories": ["business", "productivity"],
+  "icons": [
+    { "src": "Icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "Icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
