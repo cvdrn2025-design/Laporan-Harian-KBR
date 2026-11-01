@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Laporan Harian TBM</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#14191a">
+<link rel="icon" href="Icon-192.png">
+<link rel="apple-touch-icon" href="Icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<style>
+:root{--g:#3ddc3a;--gd:#1f8f1d;--d:#14191a;--d2:#252b2c;--bg:#d9dcdc;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;padding-bottom:96px;background:var(--bg);font-family:"Barlow","Segoe UI",Roboto,Arial,sans-serif;color:#1b1f20;-webkit-tap-highlight-color:transparent}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--d);color:#fff;border-bottom:2px solid var(--g)}
+.lg2{width:36px;height:36px;border-radius:50%;background:var(--g);color:#06210a;display:grid;place-items:center;font-weight:900;font-size:11px;flex:none}
+.bt{flex:1;min-width:0}.bt b{display:block;font-size:17px}.bt small{color:#9ab;font-size:12px}
+.chip{font-size:12px;font-weight:700;background:var(--d2);color:var(--g);padding:4px 10px;border-radius:20px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--d);z-index:10}
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:6;display:flex;justify-content:center;background:var(--d);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));border-top:1px solid #2f3a3b}
+.nav button{flex:1;max-width:100px;display:flex;flex-direction:column;align-items:center;gap:3px;border:0;background:none;color:#b8c4c4;font-family:inherit;font-size:11px;font-weight:600;cursor:pointer;padding:4px 0;border-radius:10px}
+.nav button:active{background:var(--d2)}.nav button:focus-visible{outline:2px solid #fff}
+.nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav .main{color:var(--g)}.nav .main svg{background:var(--g);color:#06210a;width:46px;height:46px;padding:11px;border-radius:50%;margin-top:-20px;box-shadow:0 2px 8px #0009}
+.modal.sh{place-items:end center;padding:0}.modal.sh .mb{border-radius:18px 18px 0 0;width:min(560px,100%);padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+.mi.act{background:#3ddc3a;font-weight:700}
+.mi{display:block;width:100%;text-align:left;border:0;background:#f1f4f4;border-radius:10px;padding:14px;margin:6px 0;font-family:inherit;font-size:16px;cursor:pointer;color:#1b1f20}
+
+.bar button:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:1px}
+.wrap{overflow-x:auto;padding:10px 0 30px;display:flex;justify-content:center}
+.sheet{width:794px;background:#f4f6f5;box-shadow:0 4px 20px #0005;flex:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+input,textarea{font:inherit;color:inherit;border:0;background:transparent;width:100%;padding:2px 4px;border-radius:3px}
+input:hover,input:focus{background:#3ddc3a22}
+.head{background:var(--d);color:#fff;padding:14px 22px;display:flex;gap:16px;align-items:center;border-bottom:2px solid var(--g)}
+.logo{width:150px;height:84px;flex:none;position:relative;cursor:pointer}
+.logo img{width:100%;height:100%;object-fit:contain}
+.logo svg{width:100%;height:100%}
+.hn input{color:var(--g);font-size:30px;font-weight:800;letter-spacing:1px;padding:0}
+.hn .t input{color:#cfe;font-size:14px;letter-spacing:5px;margin-top:2px}
+.meta{background:var(--d2);color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 22px}
+.meta small{color:#9ab;font-size:12px;display:block}
+.meta input{font-weight:700;font-size:16px;padding:1px 0}
+.meta input[type=date]{color-scheme:dark;font-size:13px;width:auto;margin-top:2px}
+.dw{position:relative;display:inline-block;cursor:pointer;padding:2px 0}
+.meta .dw input[type=date]{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:pointer}
+.body{padding:12px 22px 0}
+.title{display:flex;align-items:stretch;background:var(--d);color:#fff;margin-bottom:10px}
+.title h1{margin:0;font-size:34px;padding:8px 14px;flex:none;font-weight:800}
+.title .tbm{background:var(--g);color:#06210a;padding:2px 18px;text-align:center;flex:none}
+.title .tbm b{font-size:38px;line-height:1.1;display:block}
+.title .tbm span{font-size:10px;font-weight:700;white-space:nowrap}
+.nomor{margin-left:auto;padding:4px 14px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.nomor small{font-size:10px;letter-spacing:1px;color:var(--g);font-weight:700;margin-bottom:2px}
+.nn{display:flex;align-items:center;gap:5px}
+.nn input{min-width:64px;text-align:center;font-size:30px;font-weight:800;color:#fff;border:2px solid var(--g);border-radius:6px;padding:0 4px;-moz-appearance:textfield;appearance:textfield}
+.nn input::-webkit-outer-spin-button,.nn input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.ud{display:flex;flex-direction:column;gap:3px}
+.ub{border:0;background:var(--g);color:#06210a;border-radius:4px;width:32px;height:24px;font-size:12px;cursor:pointer;padding:0}
+.grid{display:grid;gap:10px;margin-bottom:10px}
+.g3{grid-template-columns:1fr 1.15fr 1.15fr}.g2{grid-template-columns:1fr 1fr}
+.card{background:#fff;border:1px solid #c5cbcb}
+.ch{background:var(--d);color:#fff;font-weight:800;font-size:15px;padding:6px 10px;display:flex;align-items:center;gap:8px;border-left:5px solid var(--g)}
+.ch em{font-style:normal;background:var(--g);color:#06210a;border-radius:3px;padding:0 7px}
+.cb{padding:6px 8px}
+.row{display:flex;gap:4px;align-items:center;padding:2px 4px;border-radius:3px;position:relative}
+.row:nth-child(odd){background:#eef1f1}
+.row .n{flex:1;font-size:13px}.row .v{width:90px;text-align:right;font-weight:800;font-size:13px}
+.row.l input.n{font-size:13px}
+.x,.add{border:0;cursor:pointer;font:700 12px inherit;font-family:inherit}
+.x{background:#e44;color:#fff;border-radius:50%;width:18px;height:18px;line-height:18px;padding:0;flex:none}
+.add{background:#e6f8e6;color:var(--gd);border-radius:4px;padding:4px 8px;margin-top:4px}
+.cuaca{text-align:center;padding:12px 6px}.wi{font-size:46px;line-height:1.1}.cuaca select{font-weight:800;font-size:19px;font-family:inherit;border:1px solid #c5cbcb;border-radius:6px;background:#fff;padding:4px 6px;margin:4px 0;max-width:100%;color:#1b1f20}
+.cuaca input{text-align:center}.cuaca .m{font-size:30px;font-weight:800}.cuaca .s{font-size:12px;color:#666}
+.num{width:20px;height:20px;border:1.5px solid var(--gd);color:var(--gd);border-radius:50%;font-size:11px;font-weight:700;display:grid;place-items:center;flex:none}
+.chk{width:18px;height:18px;accent-color:var(--gd);flex:none}
+.kond{display:flex;justify-content:space-around;padding:10px}
+.kond label{display:flex;gap:8px;align-items:center;font-weight:700;font-size:15px;cursor:pointer}
+.foto{background:#cfd3d3;height:250px;display:grid;place-items:center;cursor:pointer;color:#555;font-size:14px;overflow:hidden}
+.foto img{width:100%;height:250px;object-fit:cover}
+.fg{display:grid;gap:4px;background:#fff}.fg.n1{grid-template-columns:1fr}.fg.n2{grid-template-columns:1fr 1fr}.fg.n3{grid-template-columns:1fr 1fr 1fr}
+.fi{position:relative;height:200px;break-inside:avoid}.fg.n1 .fi{height:260px}.fi img{width:100%;height:100%;object-fit:cover;display:block}.fi .x{position:absolute;top:5px;right:5px}
+.info{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:10px;background:var(--d);color:#dfe;padding:8px 22px;font-size:12px;margin-top:10px}
+.info small{color:var(--g);font-weight:700;display:block}
+.info input{padding:0;font-size:12px;color:#fff}
+.foot{background:var(--d);color:#aab;text-align:center;font-size:11px;padding:7px;border-top:3px solid #e9c500;letter-spacing:1px}
+.modal{position:fixed;inset:0;background:#000a;z-index:20;display:none;place-items:center;padding:16px}
+.modal.on{display:grid}
+.mb{background:#fff;border-radius:10px;width:min(480px,100%);max-height:80vh;overflow:auto;padding:16px}
+.mb h2{margin:0 0 10px;font-size:18px}
+.it{display:flex;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid #ddd;font-size:14px}
+.it span{flex:1}.it button{border:0;border-radius:5px;padding:6px 10px;cursor:pointer;background:#e6f8e6;color:#14611a;font-weight:600}.it button.r{background:#fde4e4;color:#a11}
+.toast{position:fixed;bottom:calc(90px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--d);color:#fff;padding:9px 16px;border-radius:20px;font-size:14px;z-index:30;display:none}
+@media (prefers-color-scheme:dark){body{background:#2a2e2f}}
+@media screen and (max-width:820px){
+ .wrap{padding:0 0 20px;display:block}.sheet{width:100%;box-shadow:none}
+ .head{padding:12px;gap:10px}.logo{width:76px;height:44px}.hn input{font-size:17px}.hn .t input{font-size:9px;letter-spacing:2px}
+ .meta{grid-template-columns:1fr;padding:10px 14px}.body{padding:10px 12px 0}
+ .title{flex-wrap:wrap;align-items:stretch}.title h1{font-size:18px;padding:8px 10px;flex:1;display:flex;align-items:center}.title .tbm{display:flex;flex-direction:column;justify-content:center}.title .tbm span{font-size:9px}.nomor{flex:1 1 100%;margin:0;flex-direction:row;justify-content:space-between;padding:6px 12px;background:#1d2425;border-top:1px solid #2f3a3b}.nomor small{font-size:11px;margin:0}.nn input{font-size:20px;min-width:56px;height:34px}.ud{flex-direction:row}.ub{width:38px;height:34px;font-size:13px}.title .tbm{padding:2px 10px}.title .tbm b{font-size:24px}
+ .g3,.g2{grid-template-columns:1fr}
+ .row input{font-size:16px;min-height:40px}.row .v{width:100px}
+ .x{width:28px;height:28px;font-size:17px;line-height:28px}.add{padding:10px 14px;font-size:14px}
+ .fg.n2,.fg.n3{grid-template-columns:1fr 1fr}.fi,.fg.n1 .fi{height:160px}
+ .info{grid-template-columns:1fr;padding:10px 14px;font-size:14px}.info input{font-size:14px}
+}
+@media print{
+ @page{size:A4;margin:0}
+ html,body{background:#fff;padding-bottom:0}body::before,.bar,.nav,.x,.add,.modal,.toast{display:none!important}
+ .wrap{padding:0;display:block;overflow:visible}.sheet{zoom:1!important;box-shadow:none;width:210mm}
+ input:hover,input:focus{background:transparent}input[type=date]{display:none}.ci{display:none}
+ .foto .ph{display:none}
+ .cuaca select{appearance:none;-webkit-appearance:none;border-color:transparent;background:transparent;text-align:center;text-align-last:center}
+ .ud{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+ <button onclick="newDoc()"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Baru</button>
+ <button onclick="openList()"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Tersimpan</button>
+ <button class="main" onclick="saveDoc()"><svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5zM8 4v5h7M8 20v-6h8v6"/></svg>Simpan</button>
+ <button onclick="window.print()"><svg viewBox="0 0 24 24"><path d="M7 9V4h10v5M7 17H4v-7h16v7h-3M7 14h10v6H7z"/></svg>PDF</button>
+ <button onclick="$('#more').classList.add('on')"><svg viewBox="0 0 24 24" style="fill:currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>Lainnya</button>
+</nav>
+<div class="modal sh" id="more" onclick="if(event.target===this)this.classList.remove('on')"><div class="mb"><h2>Lainnya</h2><div style="display:flex;gap:8px"><button class="mi" data-l="id" onclick="setLang('id')">ID · Indonesia</button><button class="mi" data-l="vi" onclick="setLang('vi')">VI · Tiếng Việt</button></div><button class="mi" onclick="saveJpg();$('#more').classList.remove('on')">Simpan sebagai JPG</button><button class="mi" onclick="exportJson();$('#more').classList.remove('on')">Ekspor file (.json)</button><button class="mi" onclick="$('#imp').click();$('#more').classList.remove('on')">Impor file (.json)</button><button class="mi" onclick="$('#more').classList.remove('on')">Tutup</button></div></div>
+<input id="imp" type="file" accept=".json" hidden>
+<div class="wrap"><div class="sheet" id="sheet"></div></div>
+<div class="modal sh" id="modal"><div class="mb"><h2>Laporan tersimpan</h2><div id="list"></div><p><button onclick="$('#modal').classList.remove('on')" style="border:0;border-radius:6px;padding:8px 14px;cursor:pointer">Tutup</button></p></div></div>
+<div class="toast" id="toast"></div>
+<input id="fp" type="file" accept="image/*" multiple hidden><input id="fl" type="file" accept="image/*" hidden>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const iso=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const blank=()=>({id:'',company:'PT. KARYA BAJATAMA RAYA',tag:'CONTRACTOR, DESIGNER & SUPPLIER',project:'VINFAS INDONESIA DEPOT 3 KEMAYORAN',date:iso(),
+cuaca:'Cerah',cuacaSub:'(Pagi Cerah Siang - Sore -)',
+tenaga:[['Staff Teknis','4 Orang'],['Divisi Sipil','20 Orang'],['Divisi Besi','5 Orang'],['Harian Kantor','1 Orang'],['Operator Excavator','2 Orang']],
+alat:[['Excavator','2 Unit'],['Cutting Wheel','1 Unit'],['Mesin Las','1 Unit'],['Gerinda','1 Unit'],['Alat Ukur TS (Total Station)','1 Unit']],
+rencana:['Fabrikasi bekisting untuk GTT','Pekerjaan kupas beton lama','Perapian galian di dalam GTT','Tembak elevasi lapangan / titik as galian GTT / U-ditch','Gali tanah untuk U-ditch'],
+materi:[['Menghimbau untuk menggunakan APD lengkap di lapangan',1],['Dilarang merokok di area pekerjaan',1],['Jagalah keselamatan di tempat kerja',1],['Percepatan schedule pekerjaan',1]],
+no:1,kondisi:'Cerah',fotos:[],logo:'',lokasi:'NO.1B Jl Rajawali Selatan Raya Gunung Sahari Utara Sawah Besar Jakarta 10720',koordinat:'6.145339°S 106.838152°E',jam:'08:01'});
+let S;try{S=JSON.parse(localStorage.getItem('tbm_draft'))}catch(e){}
+const mig=o=>{if(o.foto){o.fotos=(o.fotos||[]).concat(o.foto);delete o.foto}o.fotos=o.fotos||[];return o};S=mig(S||blank());
+const KS='tbm_reports';
+const W={'Cerah':'☀️','Berawan':'⛅','Hujan Ringan':'🌦️','Hujan Lebat':'🌧️'};
+const getAll=()=>{try{return JSON.parse(localStorage.getItem(KS))||{}}catch(e){return{}}};
+const HR=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'],BL=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+const HV=['Chủ Nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'];
+const fmt=d=>{const x=new Date(d+'T00:00:00');if(isNaN(x))return d||'';const p=n=>String(n).padStart(2,'0');if(lang==='vi')return HV[x.getDay()]+', '+p(x.getDate())+'/'+p(x.getMonth()+1)+'/'+x.getFullYear();return HR[x.getDay()]+', '+p(x.getDate())+'-'+BL[x.getMonth()]+'-'+x.getFullYear()};
+const hari=d=>fmt(d).split(',')[0];
+function toast(t){const e=$('#toast');e.textContent=L(t);e.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.display='none',4200)}
+function draft(){try{localStorage.setItem('tbm_draft',JSON.stringify(S))}catch(e){toast('Foto terlalu besar untuk draf otomatis; tekan Simpan')}}
+const inp=(p,v,c='',t='text')=>`<input type="${t}" data-p="${p}" value="${esc(v)}" class="${c}">`;
+const list=(k,cls)=>S[k].map((r,i)=>`<div class="row ${cls||''}">${inp(k+'.'+i+'.0',r[0],'n')}${inp(k+'.'+i+'.1',r[1],'v')}<button class="x" data-del="${k}.${i}" title="Hapus">×</button></div>`).join('')+`<button class="add" data-add="${k}">+ Tambah baris</button>`;
+function render(){if((S.lang||'id')!==lang)tcAll(lang);
+$('#sheet').innerHTML=`
+<div class="head"><div class="logo" id="lg" title="Klik untuk ganti logo">${S.logo?`<img src="${S.logo}">`:`<svg viewBox="0 0 150 84"><ellipse cx="75" cy="42" rx="70" ry="38" fill="#0b1a0c" stroke="#3ddc3a" stroke-width="4"/><ellipse cx="75" cy="42" rx="30" ry="38" fill="none" stroke="#3ddc3a" stroke-width="2"/><path d="M5 42h140" stroke="#3ddc3a" stroke-width="2"/><text x="75" y="55" text-anchor="middle" font-family="Arial" font-weight="900" font-size="38" fill="#3ddc3a" stroke="#0b1a0c" stroke-width="3" paint-order="stroke">KBR</text></svg>`}</div>
+<div class="hn" style="flex:1">${inp('company',S.company)}<div class="t">${inp('tag',S.tag)}</div></div></div>
+<div class="meta"><div><small>PROYEK</small>${inp('project',S.project)}</div><div><small>HARI / TANGGAL</small><div class="dw"><b id="df" style="font-size:16px">${esc(fmt(S.date))}</b> <span class="ci">📅</span>${inp('date',S.date,'','date')}</div></div></div>
+<div class="body">
+<div class="title"><h1>LAPORAN HARIAN</h1><div class="tbm"><b>TBM</b><span>(TOOL BOX MEETING)</span></div><div class="nomor"><small>NO. LAPORAN</small><div class="nn"><input type="number" inputmode="numeric" min="1" step="1" data-p="no" aria-label="Nomor laporan" style="width:${Math.max(3,String(S.no||1).length)+1}ch" value="${esc(S.no||1)}"><div class="ud"><button class="ub" data-no="1" title="Naik">▲</button><button class="ub" data-no="-1" title="Turun">▼</button></div></div></div></div>
+<div class="grid g3">
+<div class="card"><div class="ch"><em>1</em> CUACA</div><div class="cuaca"><div class="wi">${W[S.kondisi]||'☀️'}</div><select id="wsel" aria-label="Kondisi cuaca">${Object.keys(W).map(k=>`<option value="${k}" ${S.kondisi===k?'selected':''}>${W[k]} ${k}</option>`).join('')}</select>${inp('cuacaSub',S.cuacaSub,'s')}</div></div>
+<div class="card"><div class="ch"><em>2</em> TENAGA KERJA</div><div class="cb">${list('tenaga')}</div></div>
+<div class="card"><div class="ch"><em>3</em> ALAT KERJA</div><div class="cb">${list('alat')}</div></div></div>
+<div class="grid g2">
+<div class="card"><div class="ch"><em>4</em> RENCANA KERJA</div><div class="cb">${S.rencana.map((r,i)=>`<div class="row l"><span class="num">${i+1}</span>${inp('rencana.'+i,r)}<button class="x" data-del="rencana.${i}">×</button></div>`).join('')}<button class="add" data-add="rencana">+ Tambah rencana</button></div></div>
+<div class="card"><div class="ch"><em>5</em> MATERI TBM (TOOL BOX MEETING)</div><div class="cb">${S.materi.map((r,i)=>`<div class="row l"><input type="checkbox" class="chk" style="width:18px" data-p="materi.${i}.1" ${r[1]?'checked':''}>${inp('materi.'+i+'.0',r[0])}<button class="x" data-del="materi.${i}">×</button></div>`).join('')}<button class="add" data-add="materi">+ Tambah materi</button></div></div></div>
+<div class="card"><div class="ch">FOTO DOKUMENTASI TBM PAGI</div>${S.fotos.length?`<div class="fg n${Math.min(S.fotos.length,3)}">${S.fotos.map((f,i)=>`<div class="fi"><img src="${f}"><button class="x" data-df="${i}" title="Hapus foto">×</button></div>`).join('')}</div>`:'<div class="foto" id="ft0"><span class="ph">Ketuk untuk menambah foto dokumentasi</span></div>'}<div class="cb"><button class="add" id="ft">+ Tambah foto (bisa pilih banyak)</button></div></div>
+</div>
+<div class="info"><div><small>Lokasi</small>${inp('lokasi',S.lokasi)}</div><div><small>Koordinat</small>${inp('koordinat',S.koordinat)}</div><div><small>Waktu</small><b id="wk">${esc(hari(S.date))}<br>${esc(fmt(S.date).split(', ')[1]||'')} ${esc(S.jam)}</b><br>${inp('jam',S.jam,'','time')}</div></div>
+<div class="foot">${esc(S.company)} • CONTRACTOR, DESIGNER &amp; SUPPLIER</div>`;
+applyLang($('#sheet'));fit()}
+function setP(p,v){const k=p.split('.');let o=S;for(let i=0;i<k.length-1;i++)o=o[k[i]];o[k.at(-1)]=v}
+document.addEventListener('input',e=>{const t=e.target,p=t.dataset.p;if(!p)return;setP(p,t.type==='checkbox'?(t.checked?1:0):t.value);
+if(p==='no')t.style.width=(Math.max(3,String(t.value).length)+1)+'ch';if(p==='date'||p==='jam'){$('#df').textContent=fmt(S.date);$('#wk').innerHTML=esc(hari(S.date))+'<br>'+esc(fmt(S.date).split(', ')[1]||'')+' '+esc(S.jam)}
+if(p==='company')document.querySelector('.foot').innerHTML=esc(S.company)+' • CONTRACTOR, DESIGNER &amp; SUPPLIER';draft()});
+document.addEventListener('click',e=>{const t=e.target;
+if(t.dataset.del){const[k,i]=t.dataset.del.split('.');S[k].splice(+i,1);render();draft()}
+else if(t.dataset.add){const k=t.dataset.add;S[k].push(k==='rencana'?'':k==='materi'?['',1]:['','']);render();draft()}
+else if(t.dataset.k){S.kondisi=t.dataset.k;S.cuaca=t.dataset.k;render();draft()}
+else if(t.dataset.df){S.fotos.splice(+t.dataset.df,1);render();draft()}
+else if(t.closest('#ft,#ft0'))$('#fp').click();else if(t.closest('#lg'))$('#fl').click()});
+function img(file,max,cb){const r=new FileReader();r.onload=()=>{const i=new Image();i.onload=()=>{const s=Math.min(1,max/i.width),c=document.createElement('canvas');c.width=i.width*s;c.height=i.height*s;c.getContext('2d').drawImage(i,0,0,c.width,c.height);cb(c.toDataURL(file.type==='image/png'&&max<500?'image/png':'image/jpeg',.82))};i.src=r.result};r.readAsDataURL(file)}
+$('#fp').onchange=e=>{const fs=[...e.target.files];e.target.value='';let n=0;fs.forEach(f=>img(f,1000,d=>{S.fotos.push(d);if(++n===fs.length){render();draft()}}))};
+$('#fl').onchange=e=>{const f=e.target.files[0];if(f)img(f,400,d=>{S.logo=d;render();draft()});e.target.value=''};
+function saveDoc(){const a=getAll();S.id=S.id||('r'+Date.now());S.ts=Date.now();cloudSave(JSON.parse(JSON.stringify(S))).then(ok=>{if(ok===true)toast('Tersimpan ke cloud')}).catch(e=>{console.error(e);toast('Cloud gagal: '+((e&&(e.code||e.message))||'tidak diketahui'))});a[S.id]=JSON.parse(JSON.stringify(S));try{localStorage.setItem(KS,JSON.stringify(a));draft();toast('Laporan tersimpan')}catch(e){toast('Penyimpanan penuh. Hapus laporan lama atau gunakan Ekspor file.')}}
+function newDoc(){if(!confirm('Mulai laporan baru? Perubahan yang belum disimpan akan hilang.'))return;const o=S;S=blank();S.lang=o.lang||'id';S.no=(parseInt(o.no)||1)+1;S.cuacaSub=o.cuacaSub;S.company=o.company;S.tag=o.tag;S.project=o.project;S.logo=o.logo;S.lokasi=o.lokasi;S.koordinat=o.koordinat;S.tenaga=o.tenaga.map(r=>[r[0],'']);S.alat=o.alat.map(r=>[r[0],'']);S.materi=o.materi;S.rencana=[''];render();draft()}
+let CL=null;
+function openList(){CL=null;drawList(getAll());cloudList().then(c=>{const m=Object.assign({},getAll());c.forEach(r=>{const l=m[r.id];if(!l||(r.ts||0)>(l.ts||0)){if(l&&!(r.fotos&&r.fotos.length)&&l.fotos&&l.fotos.length)r.fotos=l.fotos;m[r.id]=r}});CL=m;if($('#modal').classList.contains('on'))drawList(m)}).catch(()=>{})}
+function drawList(m){const a=Object.values(m).sort((x,y)=>y.date.localeCompare(x.date));
+$('#list').innerHTML=a.length?a.map(r=>`<div class="it"><span><b>${esc(fmt(r.date))}</b><br><small>${esc(r.project)}</small></span><button data-open="${r.id}">Buka</button><button class="r" data-rm="${r.id}">Hapus</button></div>`).join(''):'<p>Belum ada laporan tersimpan. Tekan Simpan untuk menyimpan laporan ini.</p>';
+applyLang($('#modal'));$('#modal').classList.add('on')}
+$('#list').addEventListener('click',e=>{const a=CL||getAll(),o=e.target.dataset.open,r=e.target.dataset.rm;
+if(o){S=mig(JSON.parse(JSON.stringify(a[o])));render();draft();$('#modal').classList.remove('on')}
+if(r&&confirm('Hapus laporan ini?')){const l=getAll();delete l[r];try{localStorage.setItem(KS,JSON.stringify(l))}catch(x){}cloudDel(r);CL=null;openList()}});
+function exportJson(){const b=new Blob([JSON.stringify(S)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='TBM_'+S.date+'.json';a.click();toast('Jika unduhan tidak berjalan, gunakan Simpan di browser')}
+$('#imp').onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{try{S=mig(Object.assign(blank(),JSON.parse(t)));render();draft();toast('Laporan diimpor')}catch(x){toast('File tidak valid')}});e.target.value=''};
+let lang='id';try{lang=localStorage.getItem('tbm_lang')||'id'}catch(e){}
+const D={'NO. LAPORAN':'SỐ BÁO CÁO','Tersimpan ke cloud':'Đã lưu lên đám mây','Cloud gagal, tersimpan di perangkat saja':'Lỗi đám mây, chỉ lưu trên thiết bị','Foto terlalu besar, cloud menyimpan teks saja':'Ảnh quá lớn, đám mây chỉ lưu văn bản','LAPORAN HARIAN':'BÁO CÁO HÀNG NGÀY','(TOOL BOX MEETING)':'(HỌP ĐẦU CA)','PROYEK':'DỰ ÁN','HARI / TANGGAL':'THỨ / NGÀY','CUACA':'THỜI TIẾT','TENAGA KERJA':'NHÂN LỰC','ALAT KERJA':'THIẾT BỊ','RENCANA KERJA':'KẾ HOẠCH CÔNG VIỆC','MATERI TBM (TOOL BOX MEETING)':'NỘI DUNG HỌP AN TOÀN (TBM)','FOTO DOKUMENTASI TBM PAGI':'ẢNH TƯ LIỆU HỌP BUỔI SÁNG','Lokasi':'Địa điểm','Koordinat':'Tọa độ','Waktu':'Thời gian','Cerah':'Nắng đẹp','Berawan':'Nhiều mây','Hujan Ringan':'Mưa nhỏ','Hujan Lebat':'Mưa to','+ Tambah baris':'+ Thêm dòng','+ Tambah rencana':'+ Thêm kế hoạch','+ Tambah materi':'+ Thêm nội dung','+ Tambah foto (bisa pilih banyak)':'+ Thêm ảnh (chọn nhiều ảnh)','Ketuk untuk menambah foto dokumentasi':'Chạm để thêm ảnh tư liệu','Baru':'Mới','Tersimpan':'Đã lưu','Simpan':'Lưu','Lainnya':'Khác','Simpan sebagai JPG':'Lưu thành JPG','Ekspor file (.json)':'Xuất tệp (.json)','Impor file (.json)':'Nhập tệp (.json)','Tutup':'Đóng','Laporan tersimpan':'Báo cáo đã lưu','Buka':'Mở','Hapus':'Xóa','Belum ada laporan tersimpan. Tekan Simpan untuk menyimpan laporan ini.':'Chưa có báo cáo nào được lưu. Nhấn Lưu để lưu báo cáo này.','Membuat gambar...':'Đang tạo ảnh...','Gambar JPG disimpan':'Đã lưu ảnh JPG','Gagal membuat JPG. Pastikan internet aktif.':'Tạo JPG thất bại. Hãy kiểm tra internet.','File tidak valid':'Tệp không hợp lệ','Laporan diimpor':'Đã nhập báo cáo'};
+const L=s=>(lang==='vi'&&D[s])||s;
+function trs(t){const k=t.trim();if(!k)return t;if(D[k])return t.replace(k,D[k]);const m=k.match(/^(\S+)\s+(.+)$/);if(m&&/[^\x00-\x7f]/.test(m[1])&&D[m[2]])return t.replace(m[2],D[m[2]]);return t}
+function applyLang(root){if(!root)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(n._o===undefined)n._o=n.nodeValue;const v=lang==='vi'?trs(n._o):n._o;if(n.nodeValue!==v)n.nodeValue=v}}
+function setLang(l,init){lang=l;try{localStorage.setItem('tbm_lang',l)}catch(e){}document.documentElement.lang=l;render();['.nav','#more','#modal'].forEach(s=>applyLang($(s)));document.querySelectorAll('[data-l]').forEach(b=>b.classList.toggle('act',b.dataset.l===l));if(!init)$('#more').classList.remove('on')}
+const PH={'Staff Teknis':'Nhân viên kỹ thuật','Divisi Sipil':'Bộ phận xây dựng','Divisi Besi':'Bộ phận cốt thép','Harian Kantor':'Nhân viên văn phòng theo ngày','Operator Excavator':'Thợ lái máy đào','Excavator':'Máy đào','Cutting Wheel':'Máy cắt','Mesin Las':'Máy hàn','Gerinda':'Máy mài','Alat Ukur TS (Total Station)':'Máy đo TS (Total Station)','Fabrikasi bekisting untuk GTT':'Gia công ván khuôn cho GTT','Pekerjaan kupas beton lama':'Công tác đục bóc bê tông cũ','Perapian galian di dalam GTT':'Chỉnh sửa hố đào bên trong GTT','Tembak elevasi lapangan / titik as galian GTT / U-ditch':'Đo cao độ mặt bằng / điểm tim hố đào GTT / mương chữ U (U-ditch)','Gali tanah untuk U-ditch':'Đào đất cho mương chữ U (U-ditch)','Menghimbau untuk menggunakan APD lengkap di lapangan':'Nhắc nhở sử dụng đầy đủ đồ bảo hộ lao động (PPE) tại công trường','Dilarang merokok di area pekerjaan':'Cấm hút thuốc trong khu vực thi công','Jagalah keselamatan di tempat kerja':'Giữ gìn an toàn tại nơi làm việc','Percepatan schedule pekerjaan':'Đẩy nhanh tiến độ công việc','(Pagi Cerah Siang - Sore -)':'(Sáng nắng đẹp, Trưa - Chiều -)'};
+const WD={pekerjaan:'công việc',pengecoran:'đổ bê tông',pembesian:'gia công cốt thép',fabrikasi:'gia công',bekisting:'ván khuôn',besi:'sắt thép',beton:'bê tông',tanah:'đất',galian:'hố đào',gali:'đào',timbunan:'đắp đất',pemasangan:'lắp đặt',pembongkaran:'tháo dỡ',kupas:'đục bóc',lama:'cũ',baru:'mới',kolom:'cột',balok:'dầm',pelat:'sàn',pondasi:'móng',dinding:'tường',atap:'mái',cat:'sơn',pengecatan:'sơn',keramik:'gạch men',kabel:'cáp',pipa:'ống',kayu:'gỗ',semen:'xi măng',pasir:'cát',batu:'đá',air:'nước',dan:'và',untuk:'cho',dalam:'trong',area:'khu vực',lapangan:'công trường',perapian:'chỉnh sửa',elevasi:'cao độ',tembak:'đo',titik:'điểm',pengukuran:'đo đạc',pembersihan:'dọn dẹp',persiapan:'chuẩn bị',pengiriman:'vận chuyển',material:'vật liệu',alat:'thiết bị',mesin:'máy',las:'hàn',gerinda:'máy mài',staff:'nhân viên',teknis:'kỹ thuật',divisi:'bộ phận',sipil:'xây dựng',harian:'hằng ngày',kantor:'văn phòng',operator:'thợ vận hành',menghimbau:'nhắc nhở',menggunakan:'sử dụng',lengkap:'đầy đủ',dilarang:'cấm',merokok:'hút thuốc',jagalah:'giữ gìn',keselamatan:'an toàn',tempat:'nơi',kerja:'làm việc',percepatan:'đẩy nhanh',schedule:'tiến độ',pagi:'sáng',siang:'trưa',sore:'chiều',malam:'tối',cerah:'nắng đẹp',hujan:'mưa',berawan:'nhiều mây',apd:'đồ bảo hộ (PPE)',dengan:'với',atau:'hoặc'};
+const RPH={};Object.keys(PH).forEach(k=>RPH[PH[k].toLowerCase()]=k);
+function tcOne(v,to){if(!v||!String(v).trim())return v;const k=String(v).trim(),lk=k.toLowerCase();
+if(to==='vi'){const m=Object.keys(PH).find(x=>x.toLowerCase()===lk);if(m)return PH[m];const r=k.replace(/(\d+)\s*orang\b/gi,'$1 người').replace(/(\d+)\s*unit\b/gi,'$1 chiếc');if(r!==k)return r;return k.replace(/[A-Za-z]+/g,w=>{const t=WD[w.toLowerCase()];return t?(w[0]===w[0].toUpperCase()?t.charAt(0).toUpperCase()+t.slice(1):t):w})}
+if(RPH[lk])return RPH[lk];return k.replace(/(\d+)\s*người/gi,'$1 Orang').replace(/(\d+)\s*chiếc/gi,'$1 Unit')}
+function tcAll(to){const f=v=>tcOne(v,to);S.tenaga=S.tenaga.map(r=>[f(r[0]),f(r[1])]);S.alat=S.alat.map(r=>[f(r[0]),f(r[1])]);S.rencana=S.rencana.map(f);S.materi=S.materi.map(r=>[f(r[0]),r[1]]);S.cuacaSub=f(S.cuacaSub);S.lang=to;draft()}
+const FB={apiKey:"AIzaSyC7bOhSw4qqvj5-gwcCVQdJLxpYceEVmls",authDomain:"tbm-kbr.firebaseapp.com",projectId:"tbm-kbr",storageBucket:"tbm-kbr.firebasestorage.app",messagingSenderId:"771677612326",appId:"1:771677612326:web:eb96b1463935678446b9e7"};
+let _db=null;
+function ld(u){return new Promise((ok,no)=>{const s=document.createElement('script');s.src=u;s.onload=ok;s.onerror=()=>no(new Error('SDK Firebase gagal dimuat'));document.head.appendChild(s)})}
+async function fdb(){if(_db)return _db;const b='https://cdn.jsdelivr.net/npm/firebase@10.12.2/';await ld(b+'firebase-app-compat.js');await ld(b+'firebase-firestore-compat.js');firebase.initializeApp(FB);return _db=firebase.firestore()}
+async function cloudSave(r){const db=await fdb();if(JSON.stringify(r).length>900000){r.fotos=[];r.logo='';toast('Foto terlalu besar, cloud menyimpan teks saja')}await db.collection('laporan').doc(r.id).set(r);return true}
+async function cloudList(){const db=await fdb();const q=await db.collection('laporan').get();return q.docs.map(d=>d.data())}
+async function cloudDel(id){try{const db=await fdb();await db.collection('laporan').doc(id).delete()}catch(e){}}
+function loadH2C(){return window.html2canvas?Promise.resolve():new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
+async function saveJpg(){toast('Membuat gambar...');try{await loadH2C();const c=await html2canvas($('#sheet'),{scale:2,backgroundColor:'#ffffff',useCORS:true,windowWidth:900,scrollX:0,scrollY:0,onclone:d=>{const st=d.createElement('style');st.textContent='.x,.add,.ci,.ud,input[type=date],.nav,.modal,.toast{display:none!important}.sheet{width:794px!important}.cuaca select{appearance:none;border-color:transparent;background:transparent}';d.head.appendChild(st)}});
+c.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='Laporan-TBM_'+S.date+'.jpg';document.body.appendChild(a);a.click();a.remove();toast('Gambar JPG disimpan')},'image/jpeg',.92)}catch(e){toast('Gagal membuat JPG. Pastikan internet aktif.')}}
+function fit(){$('#sheet').style.zoom=''}
+addEventListener('resize',fit);
+document.addEventListener('click',e=>{const b=e.target.closest('[data-no]');if(!b)return;S.no=Math.max(1,(parseInt(S.no)||1)+Number(b.dataset.no));const i=$('[data-p=no]');i.value=S.no;i.style.width=(Math.max(3,String(S.no).length)+1)+'ch';draft()});
+document.addEventListener('click',e=>{if(e.target.type==='date'){try{e.target.showPicker()}catch(x){}}});
+document.addEventListener('change',e=>{if(e.target.id==='wsel'){S.kondisi=S.cuaca=e.target.value;render();draft()}});
+render();setLang(lang,1);
+if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});
+if(location.hash==='#tersimpan')openList();else if(location.hash==='#baru')newDoc();
+</script>
+</body>
+</html>
