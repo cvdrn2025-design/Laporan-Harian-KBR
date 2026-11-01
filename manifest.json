@@ -1,39 +1,19 @@
 {
-  "id": "/laporan-tbm/",
+  "id": "laporan-tbm",
   "name": "Laporan Harian TBM",
   "short_name": "Laporan TBM",
-  "description": "Aplikasi laporan harian Toolbox Meeting (TBM): isi, simpan, cetak ke PDF, dan simpan sebagai JPG.",
+  "description": "Aplikasi laporan harian Toolbox Meeting (TBM).",
   "lang": "id",
-  "dir": "ltr",
   "start_url": "./laporan-tbm.html",
   "scope": "./",
   "display": "standalone",
-  "display_override": ["standalone", "minimal-ui"],
   "orientation": "portrait",
   "background_color": "#14191a",
   "theme_color": "#14191a",
   "categories": ["business", "productivity"],
-  "prefer_related_applications": false,
-  "launch_handler": { "client_mode": "navigate-existing" },
   "icons": [
     { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
     { "src": "icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
-  ],
-  "shortcuts": [
-    {
-      "name": "Laporan baru",
-      "short_name": "Baru",
-      "description": "Mulai laporan TBM hari ini",
-      "url": "./laporan-tbm.html#baru",
-      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
-    },
-    {
-      "name": "Laporan tersimpan",
-      "short_name": "Tersimpan",
-      "description": "Buka daftar laporan yang sudah disimpan",
-      "url": "./laporan-tbm.html#tersimpan",
-      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
-    }
   ]
 }
